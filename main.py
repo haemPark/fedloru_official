@@ -4,6 +4,7 @@
     @Follow vaseline555:
         https://github.com/vaseline555/Federated-Learning-in-PyTorch
 '''
+
 import os
 import sys
 import time
@@ -13,7 +14,7 @@ import traceback
 
 from importlib import import_module
 
-from src import Range, set_logger, set_seed, load_dataset, load_model, algorithmTextConverter, fullrank_resnet_loader, lowrank_resnet_loader
+from src import Range, set_logger, set_seed, load_dataset, load_model, algorithmTextConverter
 
 def main(args):
     # set seed for reproductibility
