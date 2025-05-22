@@ -149,35 +149,17 @@ if __name__ == "__main__":
     
     # low-rank update arguments
     parser.add_argument("--r", type=int, default=64)
-    parser.add_argument("--ratio", type=float, default=0.412)
     parser.add_argument("--alpha", type=int, default=64)
-    parser.add_argument("--reloru", type=str, default="500")
-    parser.add_argument("--loru", type=str, default="500")
-    parser.add_argument("--reloru_start", type=int, default=1)
-    parser.add_argument("--merge_start", type=int, default=1)
-    parser.add_argument("--reloru_start_lr_ratio", type=int, default=0.1)
-    parser.add_argument("--initial_reloru", action='store_true', default=False)
-
-    # fedhm arguments
-    parser.add_argument("--rank_factor", type=float, default=2)
+    parser.add_argument("--accumulate_and_reinit", type=str, default="500")
+    parser.add_argument("--accumulate", type=str, default="500")
+    parser.add_argument("--rank_factor", type=float, default=2) # for FedHM
     parser.add_argument("--freeze_bn", type=bool, default=True)
-    parser.add_argument('--pcgmomentum', help='momentum factor', type=float, choices=[Range(0., 1.)], default=0.9)
-
-    # additional arguments
-    parser.add_argument('--compute_client_drift', action='store_true')
-    parser.add_argument('--compute_method', type=str, default="cosine")
-
-    # FedPAQ - quantization arguments
-    parser.add_argument("--quantization_bits", type=int, default=16)
-    parser.add_argument('--quant_type', type=str, default='stochastic', choices=['stochastic', 'nearest'])
-    parser.add_argument('--small_block', type=str, default='FC', choices=['Conv', 'FC'])
-    parser.add_argument('--block_dim', type=str, default='BC', choices=['B', 'BC'])
 
     # parse arguments
     args = parser.parse_args()
     args.first_cycle_steps = args.R
-    args.reloru = list(map(int, args.reloru.split(',')))
-    args.loru = list(map(int, args.loru.split(',')))
+    args.accumulate_and_reinit = list(map(int, args.accumulate_and_reinit.split(',')))
+    args.accumulate = list(map(int, args.accumulate.split(',')))
 
     ########################
     # Making Path for Logs #
